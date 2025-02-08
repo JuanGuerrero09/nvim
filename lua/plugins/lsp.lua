@@ -9,7 +9,7 @@ return {
     require("lazydev").setup()
     local lspconfig = require("lspconfig")
     lspconfig.pyright.setup({})
-    lspconfig.tsserver.setup({})
+    lspconfig.ts_ls.setup({})
   end,
   opts = {
     inlay_hints = { enabled = true },
@@ -20,36 +20,6 @@ return {
         root_dir = function(...)
           return require("lspconfig.util").root_pattern(".git")(...)
         end,
-      },
-      tsserver = {
-        root_dir = function(...)
-          return require("lspconfig.util").root_pattern(".git")(...)
-        end,
-        single_file_support = false,
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "literal",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        },
       },
       html = {},
       lua_ls = {
