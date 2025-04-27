@@ -35,9 +35,10 @@ return {
 
     -- List of LSPs to enable
     local servers = {
+      "astro", -- Astro
       "gopls", -- Go
       "pyright", -- Python
-      "tsserver", -- JavaScript & TypeScript
+      "ts_ls", -- JavaScript & TypeScript
       "html", -- HTML
       "cssls", -- CSS
       "tailwindcss", -- Tailwind
@@ -47,6 +48,24 @@ return {
       "terraformls", -- Terraform
       "lua_ls", -- Lua
     }
+    require("mason-lspconfig").setup({
+      ensure_installed = servers,
+    })
+
+    lspconfig.astro.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        astro = {
+          configuration = {
+            css = true,
+            typescript = {
+              enable = true,
+            },
+          },
+        },
+      },
+    })
 
     -- Setup all LSPs in the list
     for _, server in ipairs(servers) do
